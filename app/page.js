@@ -1,10 +1,14 @@
-export default function Home() {
+import { getPopularMovies } from "../services/tmdb";
+import MovieCard from "../components/MovieCard";
+
+export default async function Home() {
+  const data = await getPopularMovies();
+
   return (
-    <main className="home">
+    <main>
 
       <section className="hero">
         <div className="hero-overlay">
-
           <h1>Unlimited Movies.</h1>
 
           <h2>Discover • Search • Favorite</h2>
@@ -14,9 +18,17 @@ export default function Home() {
             Search instantly, save your favorites,
             and enjoy a premium movie browsing experience.
           </p>
-
         </div>
       </section>
+
+      <div className="movie-grid">
+        {data.results.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+          />
+        ))}
+      </div>
 
     </main>
   );
