@@ -1,5 +1,6 @@
 import { getPopularMovies } from "../services/tmdb";
 import MovieCard from "../components/MovieCard";
+import SearchBar from "../components/SearchBar";
 
 export default async function Home() {
   const data = await getPopularMovies();
@@ -21,6 +22,10 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Search Bar */}
+      <SearchBar />
+
+      {/* Movies */}
       <div className="movie-grid">
         {data.results.map((movie) => (
           <MovieCard

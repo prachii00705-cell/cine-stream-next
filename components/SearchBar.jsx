@@ -1,28 +1,38 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export default function SearchBar({ onSearch }) {
-  const [search, setSearch] = useState("");
+export default function SearchBar() {
+  const [query, setQuery] = useState("");
+
+  const router = useRouter();
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!search.trim()) return;
+    if (!query.trim()) return;
 
-    onSearch(search);
+    router.push(
+      `/search?q=${encodeURIComponent(query)}`
+    );
   }
 
   return (
-    <form className="search-bar" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="search-form">
       <input
-        type="text"
+        className="search-bar"
         placeholder="Search movies..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        value={query}
+        onChange={(e) =>
+          setQuery(e.target.value)
+        }
       />
 
-      <button type="submit">
+      <button
+        className="watch-btn"
+        type="submit"
+      >
         Search
       </button>
     </form>

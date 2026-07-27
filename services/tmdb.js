@@ -40,3 +40,11 @@ export async function getMovie(id) {
 
   return response.json();
 }
+
+export async function getMovieVideos(id) {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
+  );
+
+  return res.json();
+}
