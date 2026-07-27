@@ -22,6 +22,7 @@ Movie discovery web app built with Next.js 15 and TMDB API.
 - CSS
 
 ## Live Demo
+https://cine-stream-next-self.vercel.app/
 
 ## Screenshots
 ### Desktop View
