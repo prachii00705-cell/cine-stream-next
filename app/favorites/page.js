@@ -1,23 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadFavorites } from "../../store/favoritesSlice";
 import MovieCard from "../../components/MovieCard";
 
 export default function FavoritesPage() {
+  const dispatch = useDispatch();
 
-  const [favorites] = useState(() => {
-    if (typeof window === "undefined") return [];
+  const favorites = useSelector(
+    (state) => state.favorites.movies
+  );
 
-    return JSON.parse(
-      localStorage.getItem("favorites")
-    ) || [];
-  });
+  useEffect(() => {
+    const movies =
+      JSON.parse(localStorage.getItem("favorites")) || [];
+
+    dispatch(loadFavorites(movies));
+  }, [dispatch]);
 
   return (
-    <main className="home">
-      <h1 className="results-title">
-        ❤️ My Favorites
-      </h1>
+    <main>
+      <h1 className="results-title">❤️ My Favorites</h1>
 
       {favorites.length === 0 ? (
         <p>No favorite movies yet.</p>

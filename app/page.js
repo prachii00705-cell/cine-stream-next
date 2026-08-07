@@ -1,13 +1,13 @@
 import { getPopularMovies } from "../services/tmdb";
-import MovieCard from "../components/MovieCard";
 import SearchBar from "../components/SearchBar";
+import FilterSidebar from "../components/FilterSidebar";
+import MovieGrid from "../components/MovieGrid";
 
 export default async function Home() {
   const data = await getPopularMovies();
 
   return (
     <main>
-
       <section className="hero">
         <div className="hero-overlay">
           <h1>Unlimited Movies.</h1>
@@ -25,16 +25,11 @@ export default async function Home() {
       {/* Search Bar */}
       <SearchBar />
 
-      {/* Movies */}
-      <div className="movie-grid">
-        {data.results.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movie={movie}
-          />
-        ))}
-      </div>
+      {/* Filters */}
+      <FilterSidebar />
 
+      {/* Movies */}
+      <MovieGrid movies={data.results} />
     </main>
   );
 }

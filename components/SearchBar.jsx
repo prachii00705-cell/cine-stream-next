@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 export default function SearchBar() {
@@ -8,18 +8,24 @@ export default function SearchBar() {
 
   const router = useRouter();
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
 
-    if (!query.trim()) return;
+      if (!query.trim()) return;
 
-    router.push(
-      `/search?q=${encodeURIComponent(query)}`
-    );
-  }
+      router.push(
+        `/search?q=${encodeURIComponent(query)}`
+      );
+    },
+    [query, router]
+  );
 
   return (
-    <form onSubmit={handleSubmit} className="search-form">
+    <form
+      onSubmit={handleSubmit}
+      className="search-form"
+    >
       <input
         className="search-bar"
         placeholder="Search movies..."
