@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/Footer";
+import ReduxProvider from "../providers/ReduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,18 +31,20 @@ export default function RootLayout({ children }) {
     >
       <body>
 
-        <nav className="navbar">
-          <Link href="/">🎬 Cine Stream</Link>
+        <ReduxProvider>
 
-          <div className="nav-links">
-            <Link href="/">Home</Link>
-            <Link href="/favorites">Favorites</Link>
-          </div>
-        </nav>
+          <nav className="navbar">
+            <Link href="/">🎬 Cine Stream</Link>
 
-        {children}
+            <div className="nav-links">
+              <Link href="/">Home</Link>
+              <Link href="/favorites">Favorites</Link>
+            </div>
+          </nav>
 
-        <Footer />
+          {children}
+
+        </ReduxProvider>
 
       </body>
     </html>
